@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cv5ra74pxk8pw"]
+
+[ext_resource type="Script" uid="uid://c200faapd4tsi" path="res://character_body_2d.gd" id="1_ac36x"]
+[ext_resource type="Texture2D" uid="uid://cle2finpmleut" path="res://466666666666643573457.png" id="1_cvcu8"]
+[ext_resource type="Texture2D" uid="uid://tu6wdr600ar8" path="res://Brad (2).png" id="3_f0frk"]
+[ext_resource type="Texture2D" uid="uid://dda1ljhuhk4qj" path="res://Buckets x3.png" id="4_f0frk"]
+[ext_resource type="Script" uid="uid://dmr42tc5cb157" path="res://test_enemy.gd" id="4_h4pta"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_arjtg"]
+radius = 61.03278
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cvcu8"]
+radius = 61.983868
+
+[node name="Main_canvas" type="Node2D" unique_id=1151393350]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1952727584]
+texture = ExtResource("1_cvcu8")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=715521533]
+script = ExtResource("1_ac36x")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1441140534]
+position = Vector2(0, 4.874998)
+scale = Vector2(4.560606, 2.4754903)
+texture = ExtResource("3_f0frk")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=713066237]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=533698610]
+shape = SubResource("CircleShape2D_arjtg")
+
+[node name="Label" type="Label" parent="CharacterBody2D" unique_id=2016470711]
+visible = false
+offset_left = -47.0
+offset_top = -126.0
+offset_right = 39.0
+offset_bottom = -77.0
+text = "Действуй на пробел"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=527945489]
+position = Vector2(469, 0)
+script = ExtResource("4_h4pta")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1455123606]
+shape = SubResource("CircleShape2D_cvcu8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=777172747]
+texture = ExtResource("4_f0frk")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

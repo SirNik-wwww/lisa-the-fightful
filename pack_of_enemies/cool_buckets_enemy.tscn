@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://up33vccl2t77"]
+
+[ext_resource type="Script" uid="uid://buunmb72omu47" path="res://pack_of_enemies/cool_buckets_enemy.gd" id="1_kxx7r"]
+[ext_resource type="Texture2D" uid="uid://dda1ljhuhk4qj" path="res://Buckets x3.png" id="2_3lpwo"]
+[ext_resource type="Script" uid="uid://croea3axle02v" path="res://All_fight_system/skills_and_actions/skills_base.gd" id="3_3lpwo"]
+
+[sub_resource type="Animation" id="Animation_8mlul"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(41, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_3lpwo"]
+resource_name = "atk"
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.117914654, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(41, -2), Vector2(58, -116), Vector2(82, 225)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8mlul"]
+_data = {
+&"RESET": SubResource("Animation_8mlul"),
+&"atk": SubResource("Animation_3lpwo")
+}
+
+[node name="Cool_Buckets_Enemy" type="Control" unique_id=1935342920 node_paths=PackedStringArray("sprite", "self_button", "ANIM_PL") groups=["Char", "Enemy"]]
+physics_interpolation_mode = 0
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_kxx7r")
+sprite = NodePath("Sprite2D")
+self_button = NodePath("Sprite2D/Button")
+speed = 50
+dmg = 30
+ANIM_PL = NodePath("AnimationPlayer")
+metadata/_custom_type_script = "uid://cf33hpyagm437"
+
+[node name="Sprite2D" type="TextureRect" parent="." unique_id=1610604844]
+layout_mode = 0
+offset_left = -62.555
+offset_top = -75.895
+offset_right = 67.445
+offset_bottom = 54.105003
+texture = ExtResource("2_3lpwo")
+
+[node name="Button" type="Button" parent="Sprite2D" unique_id=1840052491]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1978004921]
+visible = false
+top_level = true
+position = Vector2(41, -2)
+texture = ExtResource("2_3lpwo")
+
+[node name="Node" type="Node" parent="." unique_id=245447598]
+
+[node name="skill_base" type="Node" parent="Node" unique_id=1815169604 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("3_3lpwo")
+skill_name = "evil Панч"
+target_type = "Hero"
+Anim_player = NodePath("../../AnimationPlayer")
+metadata/_custom_type_script = "uid://croea3axle02v"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=299432382]
+libraries/ = SubResource("AnimationLibrary_8mlul")
+
+[connection signal="pressed" from="Sprite2D/Button" to="." method="_on_button_pressed"]

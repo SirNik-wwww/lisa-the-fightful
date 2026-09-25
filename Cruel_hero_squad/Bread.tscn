@@ -1,0 +1,270 @@
+[gd_scene format=3 uid="uid://swnrrluf6t7a"]
+
+[ext_resource type="Script" uid="uid://dcoulrbwk7apb" path="res://Cruel_hero_squad/bread.gd" id="1_6xcpd"]
+[ext_resource type="Texture2D" uid="uid://tu6wdr600ar8" path="res://Brad (2).png" id="1_r3htg"]
+[ext_resource type="Script" uid="uid://dp80x4y8iypxh" path="res://All_fight_system/skills_and_actions/Skill_Punch.gd" id="4_gbpfy"]
+[ext_resource type="Script" uid="uid://cnigyf6bo1q1d" path="res://All_fight_system/skills_and_actions/Action_Skills.gd" id="4_nnbh2"]
+[ext_resource type="Script" uid="uid://ca20pvuk40goq" path="res://All_fight_system/skills_and_actions/Action_Defend.gd" id="5_2cqci"]
+[ext_resource type="Texture2D" uid="uid://doy8ltmyecfnq" path="res://All_fight_system/interface_textures/hp_bar_main_test.png" id="6_xaj77"]
+[ext_resource type="Texture2D" uid="uid://5uhubrvh5ye7" path="res://All_fight_system/interface_textures/hp_bar_lives_test.png" id="7_0mahv"]
+[ext_resource type="Texture2D" uid="uid://be2lhpxyl5sc3" path="res://All_fight_system/interface_textures/hp_bar_lives_blue_test.png" id="8_bu12a"]
+
+[sub_resource type="Animation" id="Animation_gbpfy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(191, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_nnbh2"]
+resource_name = "atk"
+length = 0.61
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(191, -1), Vector2(11, -217), Vector2(-114, 237)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cqci"]
+_data = {
+&"RESET": SubResource("Animation_gbpfy"),
+&"atk": SubResource("Animation_nnbh2")
+}
+
+[node name="Bread" type="Control" unique_id=1170421944 node_paths=PackedStringArray("skill_tree", "color_rect", "HP_BAR", "HP_TEXT", "MANA_BAR", "MANA_TEXT", "self_button", "ANIM_PL") groups=["Char", "Hero"]]
+physics_interpolation_mode = 0
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_6xcpd")
+skill_tree = NodePath("Skill_tree")
+color_rect = NodePath("TextureRect/ColorRect")
+HP_BAR = NodePath("HpBar")
+HP_TEXT = NodePath("HpBar/HpLabel")
+MANA_BAR = NodePath("ManaBar")
+MANA_TEXT = NodePath("ManaBar/ManaLabel")
+self_button = NodePath("TextureRect/Button")
+speed = 100
+dmg = 15
+max_hp = 500
+def = 6
+max_sp = 40
+ANIM_PL = NodePath("AnimationPlayer")
+metadata/_custom_type_script = "uid://bsvgg27sb0a2e"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=473931228]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -88.0
+offset_right = 64.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_r3htg")
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="TextureRect" unique_id=755849175]
+layout_mode = 0
+offset_left = 24.0
+offset_right = 70.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 2
+text = "Bread"
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect" unique_id=1478357814]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Button" type="Button" parent="TextureRect" unique_id=870114060]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActTexture" type="TextureRect" parent="TextureRect" unique_id=1688627586]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 40.0
+offset_bottom = 64.0
+
+[node name="Skill_tree" type="Node" parent="." unique_id=933369796]
+
+[node name="Act_punch" type="Node" parent="Skill_tree" unique_id=1937555321 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("4_gbpfy")
+target_type = "Enemy"
+Anim_player = NodePath("../../AnimationPlayer")
+icon = ExtResource("1_r3htg")
+
+[node name="Act_Skills" type="Node" parent="Skill_tree" unique_id=1665493053 node_paths=PackedStringArray("another_skills")]
+script = ExtResource("4_nnbh2")
+another_skills = NodePath("../../Brad_skill_menu")
+
+[node name="Defend" type="Node" parent="Skill_tree" unique_id=806065391]
+script = ExtResource("5_2cqci")
+
+[node name="Brad_skill_menu" type="Node" parent="." unique_id=1050634247]
+
+[node name="Act_punch" type="Node" parent="Brad_skill_menu" unique_id=1220740071 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("4_gbpfy")
+target_type = "Enemy"
+Anim_player = NodePath("../../AnimationPlayer")
+icon = ExtResource("1_r3htg")
+
+[node name="Act_punch2" type="Node" parent="Brad_skill_menu" unique_id=961616857 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("4_gbpfy")
+target_type = "Enemy"
+Anim_player = NodePath("../../AnimationPlayer")
+icon = ExtResource("1_r3htg")
+
+[node name="Act_punch3" type="Node" parent="Brad_skill_menu" unique_id=1198867539 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("4_gbpfy")
+target_type = "Enemy"
+Anim_player = NodePath("../../AnimationPlayer")
+icon = ExtResource("1_r3htg")
+
+[node name="Act_punch4" type="Node" parent="Brad_skill_menu" unique_id=1749750071 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("4_gbpfy")
+target_type = "Enemy"
+Anim_player = NodePath("../../AnimationPlayer")
+icon = ExtResource("1_r3htg")
+
+[node name="Act_punch5" type="Node" parent="Brad_skill_menu" unique_id=677250114 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("4_gbpfy")
+target_type = "Enemy"
+Anim_player = NodePath("../../AnimationPlayer")
+icon = ExtResource("1_r3htg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1086559973]
+libraries/ = SubResource("AnimationLibrary_2cqci")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1835704585]
+visible = false
+top_level = true
+position = Vector2(191, -1)
+scale = Vector2(3.8712122, 3.3284316)
+texture = ExtResource("1_r3htg")
+
+[node name="HpBar" type="TextureProgressBar" parent="." unique_id=1832103234]
+custom_maximum_size = Vector2(112, 14)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = 32.0
+offset_right = 56.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 84.0
+nine_patch_stretch = true
+texture_under = ExtResource("6_xaj77")
+texture_progress = ExtResource("7_0mahv")
+
+[node name="HpLabel" type="Label" parent="HpBar" unique_id=1874425468]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 11
+text = "500"
+horizontal_alignment = 1
+
+[node name="ManaBar" type="TextureProgressBar" parent="." unique_id=137458528]
+custom_maximum_size = Vector2(112, 14)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = 48.0
+offset_right = 56.0
+offset_bottom = 62.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 12.0
+nine_patch_stretch = true
+texture_under = ExtResource("6_xaj77")
+texture_progress = ExtResource("8_bu12a")
+
+[node name="ManaLabel" type="Label" parent="ManaBar" unique_id=1169330309]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 11
+text = "55"
+horizontal_alignment = 1
+
+[connection signal="focus_entered" from="TextureRect/Button" to="." method="_on_button_focus_entered"]
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_button_pressed"]

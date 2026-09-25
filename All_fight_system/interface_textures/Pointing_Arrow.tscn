@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://jsdip2twj4no"]
+
+[ext_resource type="Texture2D" uid="uid://djkapktrtcc1g" path="res://All_fight_system/interface_textures/Arrow.png" id="1_lajwu"]
+
+[node name="Pointing_Arrow" type="TextureRect" unique_id=980998235]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = 32.0
+offset_right = -1008.0
+offset_bottom = -550.9152
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_lajwu")
+expand_mode = 1

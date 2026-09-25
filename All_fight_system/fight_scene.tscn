@@ -1,0 +1,266 @@
+[gd_scene format=3 uid="uid://buw7spdn245tc"]
+
+[ext_resource type="Script" uid="uid://26r3irgofvn2" path="res://All_fight_system/fight_scene.gd" id="1_0vuj3"]
+[ext_resource type="Texture2D" uid="uid://cr613poocy2cl" path="res://All_fight_system/Diarrhea_ball un.png" id="1_4brck"]
+[ext_resource type="Script" uid="uid://no16nyq8l1ok" path="res://All_fight_system/Enemy_pack.gd" id="3_hl6t1"]
+[ext_resource type="PackedScene" uid="uid://up33vccl2t77" path="res://pack_of_enemies/cool_buckets_enemy.tscn" id="4_l6bml"]
+[ext_resource type="PackedScene" uid="uid://swnrrluf6t7a" path="res://Cruel_hero_squad/Bread.tscn" id="5_5dpdq"]
+
+[sub_resource type="Animation" id="Animation_5dpdq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Start_menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-524, 120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hero_menu:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-276, 121)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Start_menu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skill_menu:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(556, 122)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skill_menu:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lng37"]
+resource_name = "swipe"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Start_menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-524, 120), Vector2(-773, 122)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hero_menu:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-276, 121), Vector2(-523, 121)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Start_menu:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skill_menu:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(556, 122), Vector2(301, 122)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skill_menu:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mnu2q"]
+_data = {
+&"RESET": SubResource("Animation_5dpdq"),
+&"swipe": SubResource("Animation_lng37")
+}
+
+[node name="FightScene" type="Node2D" unique_id=700064916 node_paths=PackedStringArray("hero_node", "unit_node")]
+script = ExtResource("1_0vuj3")
+hero_node = NodePath("Hero_menu/HBoxContHero")
+unit_node = NodePath("CharPack")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=693209071]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2028116042]
+
+[node name="Hero_menu" type="NinePatchRect" parent="." unique_id=1682195625]
+offset_left = -276.0
+offset_top = 121.0
+offset_right = 538.0
+offset_bottom = 333.0
+texture = ExtResource("1_4brck")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="HBoxContHero" type="HBoxContainer" parent="Hero_menu" unique_id=1415283816]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Bread" parent="Hero_menu/HBoxContHero" unique_id=1170421944 instance=ExtResource("5_5dpdq")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Bread2" parent="Hero_menu/HBoxContHero" unique_id=1008536227 instance=ExtResource("5_5dpdq")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Bread3" parent="Hero_menu/HBoxContHero" unique_id=1255506643 instance=ExtResource("5_5dpdq")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Bread4" parent="Hero_menu/HBoxContHero" unique_id=24195952 instance=ExtResource("5_5dpdq")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Hero_menu" unique_id=1557701923]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Start_menu" type="NinePatchRect" parent="." unique_id=1063414425]
+offset_left = -524.0
+offset_top = 120.0
+offset_right = -290.0
+offset_bottom = 331.0
+texture = ExtResource("1_4brck")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="ButtonFight" type="Button" parent="Start_menu" unique_id=1454533136]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 17.0
+offset_right = 211.0
+offset_bottom = 58.0
+text = "Fight (Бить)"
+
+[node name="ButtonFlee" type="Button" parent="Start_menu" unique_id=1260292169]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 67.0
+offset_right = 210.0
+offset_bottom = 108.0
+text = "Бежать (flee)"
+
+[node name="CharPack" type="Node" parent="." unique_id=358306545]
+script = ExtResource("3_hl6t1")
+metadata/_custom_type_script = "uid://no16nyq8l1ok"
+
+[node name="Cool_Buckets_Enemy" parent="CharPack" unique_id=74830926 instance=ExtResource("4_l6bml")]
+offset_left = -122.0
+offset_top = 4.0
+offset_right = -122.0
+offset_bottom = 4.0
+max_hp = 20
+def = 3
+
+[node name="Cool_Buckets_Enemy2" parent="CharPack" unique_id=964440304 instance=ExtResource("4_l6bml")]
+offset_left = 132.0
+offset_top = 4.0
+offset_right = 132.0
+offset_bottom = 4.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=983451422]
+libraries/ = SubResource("AnimationLibrary_mnu2q")
+
+[node name="Skill_menu" type="NinePatchRect" parent="." unique_id=2048743894]
+modulate = Color(1, 1, 1, 0)
+offset_left = 556.0
+offset_top = 122.0
+offset_right = 790.00037
+offset_bottom = 333.0
+texture = ExtResource("1_4brck")
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 15
+
+[node name="Skill_Container" type="VBoxContainer" parent="Skill_menu" unique_id=2035670537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Actions_line" type="Node" parent="." unique_id=70268919 groups=["Action_line"]]
+
+[connection signal="pressed" from="Start_menu/ButtonFight" to="." method="_on_button_fight_pressed"]

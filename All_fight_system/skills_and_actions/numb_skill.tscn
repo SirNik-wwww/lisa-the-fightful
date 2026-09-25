@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://8k33t5m4aity"]
+
+[ext_resource type="Script" uid="uid://b6xxk3ara3v75" path="res://All_fight_system/skills_and_actions/numb_skill.gd" id="1_xotsl"]
+
+[node name="Numb_skill" type="Node" unique_id=980379610]
+script = ExtResource("1_xotsl")

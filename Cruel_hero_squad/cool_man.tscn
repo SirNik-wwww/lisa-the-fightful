@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://bkfp6cadjw31n"]
+
+[ext_resource type="Script" uid="uid://dbfiehytgsa5c" path="res://Cruel_hero_squad/cool_man.gd" id="1_d3176"]
+[ext_resource type="Texture2D" uid="uid://clab3prgwonkw" path="res://bandicam 2025-11-13 20-38-41-288.png" id="2_d3176"]
+[ext_resource type="Script" uid="uid://dp80x4y8iypxh" path="res://All_fight_system/skills_and_actions/Skill_Punch.gd" id="3_jypwy"]
+[ext_resource type="Script" uid="uid://cnigyf6bo1q1d" path="res://All_fight_system/skills_and_actions/Action_Skills.gd" id="4_8ll0w"]
+[ext_resource type="Texture2D" uid="uid://tu6wdr600ar8" path="res://Brad (2).png" id="4_d3176"]
+
+[sub_resource type="Animation" id="Animation_gbpfy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(191, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_nnbh2"]
+resource_name = "atk"
+length = 0.61
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(191, -1), Vector2(11, -217), Vector2(-114, 237)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jypwy"]
+_data = {
+&"RESET": SubResource("Animation_gbpfy"),
+&"atk_test": SubResource("Animation_nnbh2")
+}
+
+[node name="Cool_man" type="Control" unique_id=1862820689 node_paths=PackedStringArray("skill_tree", "color_rect", "ANIM_PL") groups=["Char", "Hero"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_d3176")
+skill_tree = NodePath("Skill_tree")
+color_rect = NodePath("TextureRect/ColorRect")
+speed = 200
+ANIM_PL = NodePath("AnimationPlayer")
+metadata/_custom_type_script = "uid://bsvgg27sb0a2e"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1531819173]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -72.0
+offset_right = 130.74954
+offset_bottom = 126.74516
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5333463, 0.5333463)
+texture = ExtResource("2_d3176")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect" unique_id=373427168]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Button" type="Button" parent="TextureRect" unique_id=861638834]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActTexture" type="TextureRect" parent="TextureRect" unique_id=332057297]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 40.0
+offset_bottom = 64.0
+
+[node name="Skill_tree" type="Node" parent="." unique_id=295778245]
+
+[node name="Act_punch" type="Node" parent="Skill_tree" unique_id=686185064 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("3_jypwy")
+target_type = "Enemy"
+Anim_player = NodePath("../../AnimationPlayer")
+icon = ExtResource("4_d3176")
+
+[node name="Act_Skills" type="Node" parent="Skill_tree" unique_id=1946875278]
+script = ExtResource("4_8ll0w")
+skill_name = "Кул Скилл"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=16377235]
+libraries/ = SubResource("AnimationLibrary_jypwy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1539075201]
+visible = false
+top_level = true
+position = Vector2(191, -1)
+scale = Vector2(0.28958836, 0.23048085)
+texture = ExtResource("2_d3176")
+
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_button_pressed"]

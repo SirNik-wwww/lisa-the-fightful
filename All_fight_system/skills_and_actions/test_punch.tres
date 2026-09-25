@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://2nuc2dmiaoio"]
+
+[ext_resource type="Script" uid="uid://dviqoe20nd1jr" path="res://All_fight_system/skills_and_actions/Skill_resource.gd" id="1_ysbyc"]
+
+[resource]
+script = ExtResource("1_ysbyc")
+metadata/_custom_type_script = "uid://dviqoe20nd1jr"

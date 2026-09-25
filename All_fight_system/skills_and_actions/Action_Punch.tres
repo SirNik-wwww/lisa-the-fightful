@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Actions" format=3 uid="uid://bgx6d3hprv7ae"]
+
+[ext_resource type="Script" uid="uid://c003l0urx14cf" path="res://All_fight_system/skills_and_actions/Actions_resource.gd" id="1_nx4of"]
+
+[resource]
+resource_name = "ударить"
+script = ExtResource("1_nx4of")
+metadata/_custom_type_script = "uid://c003l0urx14cf"
