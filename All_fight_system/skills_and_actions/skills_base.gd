@@ -19,51 +19,36 @@ var dmg : int = 100
 
 var cur_target : Char_Blank
 var cur_targets : Array[Char_Blank] # ???
+#var final_targets : Array[Char_Blank]
 
 var skill_will_be_performed : bool = false
 
 
 
 func use():
-	posible_targets = get_tree().get_nodes_in_group(target_type)
-	cur_target = posible_targets[0]
-	cur_target.sprite.modulate = Color(8.065, 8.065, 8.065)
-	cur_target.selected = true
-	FightGlobus.enemy_reselected.connect(re_aim)
-	FightGlobus.target_confimed.connect(confim_skill)
-	FightGlobus.cur_state = FightGlobus.b_st.ENEMY_TARGETING
+	pass
 
 
 
-func color_reset(): # убирает подсветку цели
-	cur_target.sprite.modulate = Color(1.0, 1.0, 1.0)
+func re_use():
+	pass
 
 
 
-func re_aim():
-	cur_target.sprite.modulate = Color(1.0, 1.0, 1.0)
-	cur_target = FightGlobus.cur_enemy
-	cur_target.sprite.modulate = Color(8.065, 8.065, 8.065)
+func target_reset(): # убирает подсветку цели
+	pass
 
 
 
-func perform(target : Char_Blank):
-	target.change_hp(dmg)
-	Anim_player.play("atk")
-	await Anim_player.animation_finished
-	FightGlobus.before_battle_things.emit()
-	print(str(self) + "  attaked  " + str(target))
-	if owner.is_in_group("Hero"):
-		owner.act_texture.texture = null
-	else:
-		pass
+func perform(targets : Array[Char_Blank]):
+	pass
+
 
 
 func _input(_event: InputEvent) -> void:
 	if owner.selected == true and FightGlobus.cur_state == FightGlobus.b_st.ENEMY_TARGETING:
 		if Input.is_action_just_pressed("ui_cancel"):
-			color_reset()
-			#cur_target = null
+			target_reset()
 
 
 
@@ -79,11 +64,18 @@ func confim_skill():
 		owner.atk_performed = 0
 		var skill_deputy = NUMB_SKILL.instantiate()
 		skill_deputy.parent = self
-		skill_deputy.targets = cur_target
+		if cur_target != null:
+			#print(cur_target)
+			skill_deputy.targets.append(cur_target)
+			cur_target.sprite.modulate = Color(1.0, 1.0, 1.0)
+		if cur_targets.size() > 0:
+			skill_deputy.targets.assign(cur_targets)
+			for u in cur_targets:
+				u.sprite.modulate = Color(1.0, 1.0, 1.0)
 		skill_deputy.speed = owner.speed
 		owner.act_texture.texture = icon
 		B.add_child(skill_deputy)
-		cur_target.sprite.modulate = Color(1.0, 1.0, 1.0)
+		
 
 		FightGlobus.cur_state = FightGlobus.b_st.HERO_CHOOSE
 		await get_tree().process_frame # это чтобы исключить "гонку скриптов"

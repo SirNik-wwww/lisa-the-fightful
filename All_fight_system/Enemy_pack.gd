@@ -1,4 +1,5 @@
-extends Node
+extends Control
+
 class_name CharPack
 
 # Эта нода нужна как папка, в которой будут противники.

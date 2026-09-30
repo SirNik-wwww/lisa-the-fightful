@@ -4,7 +4,7 @@ class_name Char_hero
 #@export var actions : Array
 @onready var act_texture: TextureRect = $TextureRect/ActTexture
 
-@export var skill_tree : Node
+
 
 @export var color_rect : ColorRect
 
@@ -45,7 +45,7 @@ func select_me():
 			one.remove_from_group("Char_is_selected")
 		add_to_group("Char_is_selected")
 		selected = true
-		print("cur char id   " + str(FightGlobus.cur_hero_id))
+		#print("cur char id   " + str(FightGlobus.cur_hero_id))
 
 		var all = get_tree().get_nodes_in_group("Hero")
 		var sell = all.find(self)

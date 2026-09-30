@@ -20,7 +20,7 @@ var cur_bullshit : int
 
 @export var ANIM_PL : AnimationPlayer
 
-
+@export var skill_tree : Node # дерево в котором находятся все скиллы
 
 
 func _ready() -> void:

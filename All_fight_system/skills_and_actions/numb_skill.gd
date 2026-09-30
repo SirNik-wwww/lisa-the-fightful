@@ -2,7 +2,7 @@ extends Node
 
 var parent : skill_base
 
-var targets : Char_Blank
+var targets : Array[Char_Blank]
 
 var speed : int
 

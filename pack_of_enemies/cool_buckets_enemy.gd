@@ -9,3 +9,7 @@ func _on_button_pressed() -> void:
 		else:
 			confim_traget()
 			#print("Yes")
+
+#
+#func _on_button_focus_entered() -> void:
+	#select_me()

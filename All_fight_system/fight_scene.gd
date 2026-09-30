@@ -57,14 +57,15 @@ static func sort_units(a : Char_Blank, b : Char_Blank) -> bool:
 # выбор персонажа
 func character_selection():
 	show_dop_menu()
-	#if cur_char != null:
-		#cur_char.selected = false
 	var ac : Array = get_tree().get_nodes_in_group("Hero")
-	#if ac.size() >= FightGlobus.cur_hero_id:
+
 	cur_char = ac[FightGlobus.cur_hero_id]
 	cur_char.select_me()
-	#cur_char.selected = true
 	skill_choose()
+
+	#var bttns = get_tree().get_nodes_in_group("skill_button")
+	#bttns[0].grab_focus()
+	cur_char.self_button.grab_focus()
 
 
 
@@ -101,13 +102,15 @@ func en_check():
 
 
 func _on_button_fight_pressed() -> void:
-	ANIM_PL.play("swipe")
-	FightGlobus.cur_hero_id = 0
+	ANIM_PL.play("swipe") # проигрывание анимации перелистывания
+	FightGlobus.cur_hero_id = 0 # установка первого героя - текущим
 	await ANIM_PL.animation_finished
-	FightGlobus.cur_state = FightGlobus.b_st.HERO_CHOOSE
-	await get_tree().create_timer(0.1).timeout
-	character_selection()
-	FightGlobus.cur_hero.self_button.grab_focus()
+
+	FightGlobus.cur_state = FightGlobus.b_st.HERO_CHOOSE # переход в фазу выбора героя
+	await get_tree().create_timer(0.1).timeout # небольшая задержка, что скрипты успели сработать
+
+	character_selection() # выбор текущего героя, д
+	#FightGlobus.cur_hero.self_button.grab_focus() # захват кнопки текущего героя
 
 
 
@@ -118,15 +121,19 @@ func _input(_event: InputEvent) -> void:
 			var en = get_tree().get_nodes_in_group("Enemy")
 			for e in en:
 				e.selected = false
+			cur_char.self_button.grab_focus()
 
 		if FightGlobus.cur_state == FightGlobus.b_st.HERO_CHOOSE:
 			FightGlobus.cur_hero_id -= 1
 			if FightGlobus.cur_hero_id >= 0:
 				character_selection()
+				await get_tree().create_timer(0.02).timeout
+				cur_char.self_button.grab_focus()
 			if FightGlobus.cur_hero_id < 0:
 				ANIM_PL.play("swipe", -1, -1.0, true)
 				await ANIM_PL.animation_finished
 				FightGlobus.cur_state = FightGlobus.b_st.FIGHT_OR_FLEE
+				b_fight.grab_focus()
 
 	#if _event.is_action_pressed("ui_up"):
 		#if  FightGlobus.cur_state == FightGlobus.b_st.FIGHT_OR_FLEE:
@@ -135,6 +142,7 @@ func _input(_event: InputEvent) -> void:
 
 
 func show_end_turn_buttons():
+	show_dop_menu()
 	cur_char.selected = false
 	var all_children = skill_container.get_children()
 	for ch in all_children:
@@ -143,20 +151,14 @@ func show_end_turn_buttons():
 	new_button.text = "Зак ход"
 	new_button.pressed.connect(move_line)
 	skill_container.add_child(new_button)
+	new_button.grab_focus()
 
 
 
 func enemy_actions():
-	var enemies = get_tree().get_nodes_in_group("Enemy")
-	const NUMB_SKILL = preload("uid://8k33t5m4aity")
-
-	for en in enemies:
-		var skill_deputy = NUMB_SKILL.instantiate()
-		skill_deputy.parent = en.node
-		var fdfd = get_tree().get_nodes_in_group("Hero").pick_random()
-		skill_deputy.targets = fdfd
-		skill_deputy.speed = en.speed
-		actions_line.add_child(skill_deputy)
+	var enis = get_tree().get_nodes_in_group("Enemy")
+	for e in enis:
+		e.select_skill()
 
 
 
@@ -179,12 +181,16 @@ func move_line():
 
 
 func show_dop_menu(hero_viseble_mode : bool = true, things_source : Node = null):
-	$Hero_menu/HBoxContHero.visible = hero_viseble_mode
+	$Hero_menu/HeroContainer.visible = hero_viseble_mode
 
 	if hero_viseble_mode == false and things_source != null:
 		var items = things_source.get_children()
 		var item_id = 3
 		var cur_holder : HBoxContainer
+
+		var first_holder : HBoxContainer
+		var is_first : bool = true
+
 		for i in items:
 			var new_button = Button.new()
 			new_button.text = str(i.skill_name)
@@ -192,11 +198,16 @@ func show_dop_menu(hero_viseble_mode : bool = true, things_source : Node = null)
 			new_button.pressed.connect(i.use)
 			if item_id >= 2:
 				var new_holder := HBoxContainer.new()
-				$Hero_menu/VBoxContainer.add_child(new_holder)
+				$Hero_menu/ItemContainer.add_child(new_holder)
 				cur_holder = new_holder
+				if is_first == true:
+					first_holder = cur_holder
+					is_first = false
 				item_id = 0
 			item_id += 1
 			cur_holder.add_child(new_button)
+		first_holder.get_child(0).grab_focus()
+		is_first = true
 
 		if cur_holder.get_children().size() == 1:
 			var dumb_child = Control.new()
@@ -205,6 +216,13 @@ func show_dop_menu(hero_viseble_mode : bool = true, things_source : Node = null)
 
 
 	else :
-		var items = $Hero_menu/VBoxContainer.get_children()
+		var items = $Hero_menu/ItemContainer.get_children()
 		for i in items:
 			i.queue_free()
+
+
+
+
+
+func _on_select_all_button_pressed() -> void: #нужна для того, чтобы выбирать всех героев/врагов
+	FightGlobus.target_confimed.emit()

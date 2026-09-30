@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://buunmb72omu47" path="res://pack_of_enemies/cool_buckets_enemy.gd" id="1_kxx7r"]
 [ext_resource type="Texture2D" uid="uid://dda1ljhuhk4qj" path="res://Buckets x3.png" id="2_3lpwo"]
-[ext_resource type="Script" uid="uid://croea3axle02v" path="res://All_fight_system/skills_and_actions/skills_base.gd" id="3_3lpwo"]
+[ext_resource type="Script" uid="uid://bbgo70defjtt8" path="res://All_fight_system/skills_and_actions/Skill_Punch_Heros_ass.gd" id="3_3lpwo"]
 
 [sub_resource type="Animation" id="Animation_8mlul"]
 length = 0.001
@@ -65,7 +65,7 @@ _data = {
 &"atk": SubResource("Animation_3lpwo")
 }
 
-[node name="Cool_Buckets_Enemy" type="Control" unique_id=1935342920 node_paths=PackedStringArray("sprite", "self_button", "ANIM_PL") groups=["Char", "Enemy"]]
+[node name="Cool_Buckets_Enemy" type="Control" unique_id=1935342920 node_paths=PackedStringArray("sprite", "self_button", "ANIM_PL", "skill_tree") groups=["Char", "Enemy"]]
 physics_interpolation_mode = 0
 layout_mode = 3
 anchors_preset = 0
@@ -76,6 +76,7 @@ self_button = NodePath("Sprite2D/Button")
 speed = 50
 dmg = 30
 ANIM_PL = NodePath("AnimationPlayer")
+skill_tree = NodePath("Node")
 metadata/_custom_type_script = "uid://cf33hpyagm437"
 
 [node name="Sprite2D" type="TextureRect" parent="." unique_id=1610604844]
@@ -103,7 +104,7 @@ texture = ExtResource("2_3lpwo")
 
 [node name="Node" type="Node" parent="." unique_id=245447598]
 
-[node name="skill_base" type="Node" parent="Node" unique_id=1815169604 node_paths=PackedStringArray("Anim_player")]
+[node name="PHA" type="Node" parent="Node" unique_id=1815169604 node_paths=PackedStringArray("Anim_player")]
 script = ExtResource("3_3lpwo")
 skill_name = "evil Панч"
 target_type = "Hero"
@@ -113,4 +114,5 @@ metadata/_custom_type_script = "uid://croea3axle02v"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=299432382]
 libraries/ = SubResource("AnimationLibrary_8mlul")
 
+[connection signal="focus_entered" from="Sprite2D/Button" to="." method="_on_button_focus_entered"]
 [connection signal="pressed" from="Sprite2D/Button" to="." method="_on_button_pressed"]

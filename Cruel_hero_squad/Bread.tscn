@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dp80x4y8iypxh" path="res://All_fight_system/skills_and_actions/Skill_Punch.gd" id="4_gbpfy"]
 [ext_resource type="Script" uid="uid://cnigyf6bo1q1d" path="res://All_fight_system/skills_and_actions/Action_Skills.gd" id="4_nnbh2"]
 [ext_resource type="Script" uid="uid://ca20pvuk40goq" path="res://All_fight_system/skills_and_actions/Action_Defend.gd" id="5_2cqci"]
+[ext_resource type="Script" uid="uid://tdibhu8d8epd" path="res://All_fight_system/skills_and_actions/Skill_punch_all_enemies.gd" id="6_0mahv"]
 [ext_resource type="Texture2D" uid="uid://doy8ltmyecfnq" path="res://All_fight_system/interface_textures/hp_bar_main_test.png" id="6_xaj77"]
 [ext_resource type="Texture2D" uid="uid://5uhubrvh5ye7" path="res://All_fight_system/interface_textures/hp_bar_lives_test.png" id="7_0mahv"]
 [ext_resource type="Texture2D" uid="uid://be2lhpxyl5sc3" path="res://All_fight_system/interface_textures/hp_bar_lives_blue_test.png" id="8_bu12a"]
@@ -70,13 +71,12 @@ _data = {
 &"atk": SubResource("Animation_nnbh2")
 }
 
-[node name="Bread" type="Control" unique_id=1170421944 node_paths=PackedStringArray("skill_tree", "color_rect", "HP_BAR", "HP_TEXT", "MANA_BAR", "MANA_TEXT", "self_button", "ANIM_PL") groups=["Char", "Hero"]]
+[node name="Bread" type="Control" unique_id=1170421944 node_paths=PackedStringArray("color_rect", "HP_BAR", "HP_TEXT", "MANA_BAR", "MANA_TEXT", "self_button", "ANIM_PL", "skill_tree") groups=["Char", "Hero"]]
 physics_interpolation_mode = 0
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_6xcpd")
-skill_tree = NodePath("Skill_tree")
 color_rect = NodePath("TextureRect/ColorRect")
 HP_BAR = NodePath("HpBar")
 HP_TEXT = NodePath("HpBar/HpLabel")
@@ -89,6 +89,7 @@ max_hp = 500
 def = 6
 max_sp = 40
 ANIM_PL = NodePath("AnimationPlayer")
+skill_tree = NodePath("Skill_tree")
 metadata/_custom_type_script = "uid://bsvgg27sb0a2e"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=473931228]
@@ -158,35 +159,13 @@ script = ExtResource("5_2cqci")
 
 [node name="Brad_skill_menu" type="Node" parent="." unique_id=1050634247]
 
-[node name="Act_punch" type="Node" parent="Brad_skill_menu" unique_id=1220740071 node_paths=PackedStringArray("Anim_player")]
-script = ExtResource("4_gbpfy")
+[node name="PAL" type="Node" parent="Brad_skill_menu" unique_id=685242459 node_paths=PackedStringArray("Anim_player")]
+script = ExtResource("6_0mahv")
+skill_name = "Трахнуть Каждого"
 target_type = "Enemy"
 Anim_player = NodePath("../../AnimationPlayer")
 icon = ExtResource("1_r3htg")
-
-[node name="Act_punch2" type="Node" parent="Brad_skill_menu" unique_id=961616857 node_paths=PackedStringArray("Anim_player")]
-script = ExtResource("4_gbpfy")
-target_type = "Enemy"
-Anim_player = NodePath("../../AnimationPlayer")
-icon = ExtResource("1_r3htg")
-
-[node name="Act_punch3" type="Node" parent="Brad_skill_menu" unique_id=1198867539 node_paths=PackedStringArray("Anim_player")]
-script = ExtResource("4_gbpfy")
-target_type = "Enemy"
-Anim_player = NodePath("../../AnimationPlayer")
-icon = ExtResource("1_r3htg")
-
-[node name="Act_punch4" type="Node" parent="Brad_skill_menu" unique_id=1749750071 node_paths=PackedStringArray("Anim_player")]
-script = ExtResource("4_gbpfy")
-target_type = "Enemy"
-Anim_player = NodePath("../../AnimationPlayer")
-icon = ExtResource("1_r3htg")
-
-[node name="Act_punch5" type="Node" parent="Brad_skill_menu" unique_id=677250114 node_paths=PackedStringArray("Anim_player")]
-script = ExtResource("4_gbpfy")
-target_type = "Enemy"
-Anim_player = NodePath("../../AnimationPlayer")
-icon = ExtResource("1_r3htg")
+metadata/_custom_type_script = "uid://croea3axle02v"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1086559973]
 libraries/ = SubResource("AnimationLibrary_2cqci")

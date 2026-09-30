@@ -1,4 +1,5 @@
 extends Node
+class_name Skill_menu
 
 @export var skill_name : String = "Скилл"
 

@@ -141,7 +141,7 @@ _data = {
 
 [node name="FightScene" type="Node2D" unique_id=700064916 node_paths=PackedStringArray("hero_node", "unit_node")]
 script = ExtResource("1_0vuj3")
-hero_node = NodePath("Hero_menu/HBoxContHero")
+hero_node = NodePath("Hero_menu/HeroContainer")
 unit_node = NodePath("CharPack")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=693209071]
@@ -159,7 +159,7 @@ patch_margin_top = 15
 patch_margin_right = 15
 patch_margin_bottom = 15
 
-[node name="HBoxContHero" type="HBoxContainer" parent="Hero_menu" unique_id=1415283816]
+[node name="HeroContainer" type="HBoxContainer" parent="Hero_menu" unique_id=1415283816]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -168,23 +168,23 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Bread" parent="Hero_menu/HBoxContHero" unique_id=1170421944 instance=ExtResource("5_5dpdq")]
+[node name="Bread" parent="Hero_menu/HeroContainer" unique_id=1170421944 instance=ExtResource("5_5dpdq")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Bread2" parent="Hero_menu/HBoxContHero" unique_id=1008536227 instance=ExtResource("5_5dpdq")]
+[node name="Bread2" parent="Hero_menu/HeroContainer" unique_id=1008536227 instance=ExtResource("5_5dpdq")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Bread3" parent="Hero_menu/HBoxContHero" unique_id=1255506643 instance=ExtResource("5_5dpdq")]
+[node name="Bread3" parent="Hero_menu/HeroContainer" unique_id=1255506643 instance=ExtResource("5_5dpdq")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Bread4" parent="Hero_menu/HBoxContHero" unique_id=24195952 instance=ExtResource("5_5dpdq")]
+[node name="Bread4" parent="Hero_menu/HeroContainer" unique_id=24195952 instance=ExtResource("5_5dpdq")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Hero_menu" unique_id=1557701923]
+[node name="ItemContainer" type="VBoxContainer" parent="Hero_menu" unique_id=1557701923]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -220,11 +220,14 @@ offset_right = 210.0
 offset_bottom = 108.0
 text = "Бежать (flee)"
 
-[node name="CharPack" type="Node" parent="." unique_id=358306545]
+[node name="CharPack" type="Control" parent="." unique_id=478986677]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("3_hl6t1")
 metadata/_custom_type_script = "uid://no16nyq8l1ok"
 
 [node name="Cool_Buckets_Enemy" parent="CharPack" unique_id=74830926 instance=ExtResource("4_l6bml")]
+layout_mode = 0
 offset_left = -122.0
 offset_top = 4.0
 offset_right = -122.0
@@ -233,6 +236,7 @@ max_hp = 20
 def = 3
 
 [node name="Cool_Buckets_Enemy2" parent="CharPack" unique_id=964440304 instance=ExtResource("4_l6bml")]
+layout_mode = 0
 offset_left = 132.0
 offset_top = 4.0
 offset_right = 132.0
@@ -263,4 +267,19 @@ grow_vertical = 2
 
 [node name="Actions_line" type="Node" parent="." unique_id=70268919 groups=["Action_line"]]
 
+[node name="Select_all_Button" type="Button" parent="." unique_id=2033001966 groups=["select_all_button"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -619.0
+offset_top = -856.0
+offset_right = 624.0
+offset_bottom = -427.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "all"
+
 [connection signal="pressed" from="Start_menu/ButtonFight" to="." method="_on_button_fight_pressed"]
+[connection signal="pressed" from="Select_all_Button" to="." method="_on_select_all_button_pressed"]
